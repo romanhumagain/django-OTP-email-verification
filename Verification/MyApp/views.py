@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.contrib import messages
 from MyApp.models import *
 from MyApp.utils import *
 import uuid
@@ -22,8 +23,8 @@ def emailVerification(request):
 
         sendEmailToken(email, profile.email_token)
 
+        messages.success(request, 'Successfully sent your verification email')
     return render(request, "index.html")
-
 
 def verify(request, token):
     try:
